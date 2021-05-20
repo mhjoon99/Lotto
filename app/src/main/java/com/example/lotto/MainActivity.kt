@@ -13,9 +13,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val cardConstell = findViewById<CardView>(R.id.CardConstell)
+        val cardName = findViewById<CardView>(R.id.CardName)
 
         cardConstell.setOnClickListener {
             startActivity(Intent(this@MainActivity, ConstellationActivity::class.java))
+        }
+        cardName.setOnClickListener {
+            startActivity(Intent(this@MainActivity, NameActivity::class.java))
         }
     }
 }

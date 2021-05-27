@@ -15,17 +15,18 @@ fun getRandomLottoNumber () : Int{
 fun getRandomLottoNumbers(): MutableList<Int> {
     val lottoNumbers = mutableListOf<Int>()
     while(true) {
-        val number = getRandomLottoNumber()
+        var number = getRandomLottoNumber()
         var flag_exist = 0
+
         if(lottoNumbers.size < 1){
             lottoNumbers.add(number)
             continue
-        }
-
-        for (j in 0 until lottoNumbers.size) {
-            if (number == lottoNumbers[j])
-                flag_exist = 1
+        } else {
+            for (j in 0 until lottoNumbers.size) {
+                if (number == lottoNumbers[j])
+                    flag_exist = 1
                 break
+            }
         }
         if (flag_exist == 0)
             lottoNumbers.add(number)

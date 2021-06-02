@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.CalendarView
 import android.widget.DatePicker
 import android.widget.TextView
+import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -33,11 +34,11 @@ class ConstellationActivity : AppCompatActivity() {
 
         datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
                 object : CalendarView.OnDateChangeListener, DatePicker.OnDateChangedListener {
-                    override fun onSelectedDayChange(p0: CalendarView, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                    override fun onSelectedDayChange(view: CalendarView, year: Int, monthOfYear: Int, dayOfMonth: Int) {
 
                     }
 
-                    override fun onDateChanged(p0: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                    override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
                         txtConstell.text = makeConstellationString(datePicker.month, datePicker.dayOfMonth)
                     }
                 })
@@ -49,7 +50,8 @@ class ConstellationActivity : AppCompatActivity() {
         for (number in 1..45){
             list.add(number)
         }
-        val targetString = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Date()) + str
+
+        val targetString = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).calendar.toString() + str
 
         // List 섞기. SEED 값으로 이름의 hash code 사용
         list.shuffle(Random(targetString.hashCode().toLong()))

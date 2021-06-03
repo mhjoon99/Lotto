@@ -25,7 +25,7 @@ class ConstellationActivity : AppCompatActivity() {
         btnGoResultConstell.setOnClickListener {
             //startActivity(Intent(this, ResultActivity::class.java))
             val intent = Intent(this,ResultActivity::class.java)
-            intent.putIntegerArrayListExtra("result", ArrayList(getShuffledLottoNumbersFromHash(txtConstell.text.toString())))
+            intent.putIntegerArrayListExtra("result", ArrayList(getShuffledLottoNumbersFromHash(txtConstell.text.toString(), datePicker.month.toString().toInt(), datePicker.dayOfMonth)))
             intent.putExtra("constellation", makeConstellationString(datePicker.month, datePicker.dayOfMonth))
             startActivity(intent)
         }
@@ -33,25 +33,26 @@ class ConstellationActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
 
         datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
-                object : CalendarView.OnDateChangeListener, DatePicker.OnDateChangedListener {
-                    override fun onSelectedDayChange(view: CalendarView, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+            object : CalendarView.OnDateChangeListener, DatePicker.OnDateChangedListener {
+                override fun onSelectedDayChange(view: CalendarView, year: Int, monthOfYear: Int, dayOfMonth: Int) {
 
-                    }
+                }
 
-                    override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-                        txtConstell.text = makeConstellationString(datePicker.month, datePicker.dayOfMonth)
-                    }
-                })
+                override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+                    txtConstell.text = makeConstellationString(datePicker.month, datePicker.dayOfMonth)
+                }
+            })
 
     }
 
-    fun getShuffledLottoNumbersFromHash(str: String): MutableList<Int>{
+    fun getShuffledLottoNumbersFromHash(str: String, month: Int, dayOfMonth: Int): MutableList<Int>{
         val list = mutableListOf<Int>()
         for (number in 1..45){
             list.add(number)
         }
 
-        val targetString = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).calendar.toString() + str
+        val targetString = "${month}${dayOfMonth}${str}"
+
 
         // List 섞기. SEED 값으로 이름의 hash code 사용
         list.shuffle(Random(targetString.hashCode().toLong()))

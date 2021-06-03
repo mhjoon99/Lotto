@@ -20,8 +20,7 @@ class ResultActivity : AppCompatActivity() {
 
         strConstellation?.let {
             val resultLabel = findViewById<TextView>(R.id.resultLabel)
-            resultLabel.text = "${strConstellation}의 ${SimpleDateFormat("yyyy년 MM월 dd일").calendar} 로또 번호입니다."
-            //resultLabel.text = "${month+1}${String.format("%02d", dayOfMonth)}".toInt()
+            resultLabel.text = "${strConstellation}의 ${SimpleDateFormat("yyyy년 MM월 dd일").format(Date())} 로또 번호입니다."
         }
 //        result?.let{
 //            updateLottoBallImages(result.sortedBy{it})

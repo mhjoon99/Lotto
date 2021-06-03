@@ -83,12 +83,13 @@
                     android:textSize="24sp" />
 
                 <TextView
+                    android:id="@+id/txtConstell"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="0.5"
                     android:gravity="center|top"
-                    android:text="별자리 기반 숫자 생성" />
+                    android:text="@string/small_constell_menu_label" />
             </LinearLayout>
 
             <ImageView
